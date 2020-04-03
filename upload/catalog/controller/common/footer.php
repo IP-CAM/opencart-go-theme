@@ -65,6 +65,7 @@ class ControllerCommonFooter extends Controller {
 			$this->model_tool_online->addOnline($ip, $this->customer->getId(), $url, $referer);
 		}
 
+        $this->document->addScript('catalog/view/theme/go/js/main.js', 'footer');
 		$data['scripts'] = $this->document->getScripts('footer');
 
 		return $this->load->view('common/footer', $data);
