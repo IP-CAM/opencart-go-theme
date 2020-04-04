@@ -1,161 +1,61 @@
 {{ header }}
-<div id="product-category" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
-  <div class="row">{{ column_left }}
-    <div id="content" class="col">{{ content_top }}
-      <h2>{{ heading_title }}</h2>
-      {% if thumb or description %}
-        <div class="row">
-          {% if thumb %}
-            <div class="col-sm-2"><img src="{{ thumb }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="img-thumbnail"/></div>
-          {% endif %}
-          {% if description %}
-            <div class="col-sm-10">{{ description }}</div>
-          {% endif %}
+<div class="wrapper">
+    <div class="header">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <button class="btn  btn-link text-dark menu-btn"><img src="catalog/view/theme/go/image/menu.png" alt=""><span
+                            class="new-notification"></span></button>
+            </div>
+            <div class="col text-center"><h3 class="header-logo mt-3">OBKE</h3></div>
+            <div class="col-auto">
+                <a href="profile.html" class="btn  btn-link text-dark"><i class="material-icons">account_circle</i></a>
+            </div>
         </div>
-        <hr/>
-      {% endif %}
-      {% if categories %}
-        <h3>{{ text_refine }}</h3>
-        {% if categories|length <= 5 %}
-          <div class="row">
-            <div class="col-sm-3">
-              <ul>
-                {% for category in categories %}
-                  <li><a href="{{ category.href }}">{{ category.name }}</a></li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        {% else %}
-          <div class="row">
-            {% for category in categories|batch((categories|length / 4)|round(1, 'ceil')) %}
-              <div class="col-sm-3">
-                <ul>
-                  {% for child in category %}
-                    <li><a href="{{ child.href }}">{{ child.name }}</a></li>
-                  {% endfor %}
-                </ul>
-              </div>
-            {% endfor %}
-          </div>
-          <br/>
-        {% endif %}
-      {% endif %}
-      {% if products %}
-        <div id="display-control" class="row">
-          <div class="col-md-3">
-            <div class="mb-3">
-              <a href="{{ compare }}" id="compare-total" class="btn btn-primary d-block"><i class="fas fa-exchange-alt"></i> <span class="d-inline d-md-none d-lg-inline">{{ text_compare }}</span></a>
-            </div>
-          </div>
-          <div class="col-md-1 d-none d-md-block">
-            <div class="btn-group">
-              <button type="button" id="list-view" class="btn btn-light" data-toggle="tooltip" title="{{ button_list }}"><i class="fas fa-th-list"></i></button>
-              <button type="button" id="grid-view" class="btn btn-light" data-toggle="tooltip" title="{{ button_grid }}"><i class="fas fa-th"></i></button>
-            </div>
-          </div>
-          <div class="col-md-4 offset-md-1 col-6">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label for="input-sort" class="input-group-text">{{ text_sort }}</label>
-              </div>
-              <select id="input-sort" class="form-control" onchange="location = this.value;">
-                {% for sorts in sorts %}
-                  {% if sorts.value == '%s-%s'|format(sort, order) %}
-                    <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
-                  {% else %}
-                    <option value="{{ sorts.href }}">{{ sorts.text }}</option>
-                  {% endif %}
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-          <div class="col-md-3 col-6">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label for="input-limit" class="input-group-text">{{ text_limit }}</label>
-              </div>
-              <select id="input-limit" class="form-control" onchange="location = this.value;">
-                {% for limits in limits %}
-                  {% if limits.value == limit %}
-                    <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
-                  {% else %}
-                    <option value="{{ limits.href }}">{{ limits.text }}</option>
-                  {% endif %}
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          {% for product in products %}
-            <div class="product-layout product-list col-12">
-
-              <div class="product-thumb">
-
-                <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-fluid"/></a></div>
-
-                <div>
-                  <div class="caption">
-                    <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-                    <p>{{ product.description }}</p>
-
-                    {% if product.price %}
-                      <p class="price">
-                        {% if not product.special %}
-                          {{ product.price }}
-                        {% else %}
-                          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}
-                        {% if product.tax %}
-                          <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
-                        {% endif %}
-                      </p>
-                    {% endif %}
-
-                    {% if product.rating %}
-                      <div class="rating">
-                        {% for i in 1..5 %}
-                          {% if product.rating < i %} <span class="fas fa-stack"><i class="far fa-star fa-stack-2x"></i></span> {% else %} <span class="fas fa-stack"><i class="fas fa-star fa-stack-2x"></i><i class="far fa-star fa-stack-2x"></i></span>{% endif %}
-                        {% endfor %}
-                      </div>
-                    {% endif %}
-                  </div>
-                  <div class="button-group">
-                    <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fas fa-shopping-cart"></i> <span class="d-none d-lg-inline">{{ button_cart }}</span></button>
-                    <button type="button" data-toggle="tooltip" data-placement="top" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fas fa-heart"></i></button>
-                    <button type="button" data-toggle="tooltip" data-placement="top" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fas fa-exchange-alt"></i></button>
-                  </div>
-
-                </div>
-
-
-              </div>
-
-            </div>
-
-          {% endfor %}
-        </div>
-        <div class="row">
-          <div class="col-sm-6 text-left">{{ pagination }}</div>
-          <div class="col-sm-6 text-right">{{ results }}</div>
-        </div>
-      {% endif %}
-
-      {% if not categories and not products %}
-        <p>{{ text_no_results }}</p>
-        <div class="d-inline-block pt-2 pd-2 w-100">
-          <div class="float-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
-        </div>
-      {% endif %}
-
-      {{ content_bottom }}
     </div>
-    {{ column_right }}
-  </div>
+    <div class="container">
+        <input type="text" class="form-control form-control-lg search my-3" placeholder="Search">
+        <div class="row">
+            {% if products %}
+                {% for product in products %}
+                    <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+                        <div class="card shadow-sm border-0 mb-4" style="height: 250px">
+                            <div class="card-body">
+                                <button class="btn btn-sm btn-link p-0"><i
+                                            class="material-icons md-18">favorite_outline</i>
+                                </button>
+                                {#                                <div class="badge badge-success float-right mt-1">10% off</div>#}
+
+                                <figure class="product-image"><img src="{{ product.thumb }}" alt="{{ product.name }}">
+                                </figure>
+
+                                <a href="product-details.html"
+                                   class="text-dark mb-1 mt-2 h6 d-block">{{ product.name }}</a>
+                                <p class="text-secondary small mb-2">{#product subtitle here#}</p>
+                                <h5 class="text-success font-weight-normal mb-0">{{ product.price }}</h5>
+                                <p class="text-secondary small text-mute mb-0">{{ product.weight | number_format(2) }} <sub>kg</sub></p>
+                                <button class="btn btn-default button-rounded-36 shadow-sm float-bottom-right"><i
+                                            class="material-icons md-18">shopping_cart</i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="btn btn-default btn-rounded mb-3">
+                    <div class="btn-loader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <h6 class="d-inline-block text-left mx-2 mb-0 text-normal">Loading Content<br><small
+                                class="text-mute">Please wait for a while...</small></h6>
+                </div>
+            </div>
+        </div>
+        {{ footer }}
+    </div>
 </div>
-{{ footer }}
