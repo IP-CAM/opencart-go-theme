@@ -35,7 +35,7 @@ class ControllerCommonMenu extends Controller {
 
 				// Level 1
 				$data['categories'][] = array(
-				    'image'    => $this->model_tool_image->resize($category['image'], 100, 100),
+				    'image'    => $this->model_tool_image->resize($category['image'], 150, 150),
 					'name'     => $category['name'],
 					'children' => $children_data,
 					'column'   => $category['column'] ? $category['column'] : 1,

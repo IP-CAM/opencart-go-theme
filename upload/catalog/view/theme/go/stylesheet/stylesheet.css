@@ -867,7 +867,8 @@ body a.btn-primary, body a.btn-warning, body a.btn-danger, body a.btn-success {
   width: 60px;
   border-radius: 30px;
   margin: 0 15px;
-  margin-top: -20px; }
+  margin-top: -20px;
+  color: #fff; }
 /* page specific */
 .subtitle {
   font-size: 16px;
