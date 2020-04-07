@@ -66,6 +66,7 @@ class ControllerCommonFooter extends Controller {
 		}
 
         $this->document->addScript('catalog/view/theme/go/js/main.js', 'footer');
+        $this->document->addScript('catalog/view/theme/go/js/swiper/swiper.min.js', 'footer');
 		$data['scripts'] = $this->document->getScripts('footer');
 
 		return $this->load->view('common/footer', $data);
