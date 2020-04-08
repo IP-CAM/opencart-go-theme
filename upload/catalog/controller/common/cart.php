@@ -132,4 +132,9 @@ class ControllerCommonCart extends Controller {
 	public function info() {
 		$this->response->setOutput($this->index());
 	}
+
+	public function count() {
+        $data['cart_count'] = $this->cart->countProducts();
+        $this->response->setOutput($this->load->view('common/cart_count', $data));
+    }
 }

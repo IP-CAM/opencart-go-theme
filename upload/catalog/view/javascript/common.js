@@ -168,6 +168,7 @@ var cart = {
 				}
 
 				if (json['success']) {
+					console.log(json.success);
 					html  = '<div id="toast" class="toast">';
 					html += '  <div class="toast-header">';
 					html += '    <strong class="mr-auto"><i class="fas fa-shopping-cart"></i> Shopping Cart</strong>';
@@ -183,7 +184,7 @@ var cart = {
 					$('#toast').toast('show');
 
 					// Need to set timeout otherwise it wont update the total
-					$('#cart').parent().load('index.php?route=common/cart/info');
+					$('#cart').load('index.php?route=common/cart/count');
 				}
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
