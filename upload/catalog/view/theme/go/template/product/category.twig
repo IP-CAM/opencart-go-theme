@@ -32,8 +32,11 @@
                                    class="text-dark mb-1 mt-2 h6 d-block">{{ product.name }}</a>
                                 <p class="text-secondary small mb-2">{#product subtitle here#}</p>
                                 <h5 class="text-success font-weight-normal mb-0">{{ product.price }}</h5>
-                                <p class="text-secondary small text-mute mb-0">{{ product.weight | number_format(2) }} <sub>kg</sub></p>
-                                <button onclick="cart.add({{ product.product_id }}, {{ product.minimum }})" class="btn btn-default button-rounded-36 shadow-sm float-bottom-right"><i
+                                <p class="text-secondary small text-mute mb-0">{{ product.weight | number_format(2) }}
+                                    <sub>kg</sub></p>
+                                <button onclick="cart.add({{ product.product_id }}, {{ product.minimum }}, '#product_cart_{{ loop.index }}')"
+                                        id="product_cart_{{ loop.index }}"
+                                        class="btn btn-default button-rounded-36 shadow-sm float-bottom-right"><i
                                             class="material-icons md-18">shopping_cart</i></button>
                             </div>
                         </div>
