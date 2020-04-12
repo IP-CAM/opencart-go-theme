@@ -202,14 +202,22 @@ var cart = {
         $.ajax({
             url: 'index.php?route=checkout/cart/edit',
             type: 'post',
-            data: 'key=' + key + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
-            dataType: 'json',
+            data: {
+                quantity: {
+                    [`${key}`]: typeof (quantity) != 'undefined' ? quantity : 1
+                }
+            },
+            // data: 'quantity[' + key + ']=' + (typeof (quantity) != 'undefined' ? quantity : 1),
+            // data: 'key=' + key + '&quantity=' + (typeof (quantity) != 'undefined' ? quantity : 1),
+            dataType: 'html',
             beforeSend: function () {
                 $('#cart > button').button('loading');
             },
+
             complete: function () {
                 $('#cart > button').button('reset');
             },
+
             success: function (json) {
                 if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
                     location = 'index.php?route=checkout/cart';
@@ -217,6 +225,7 @@ var cart = {
                     $('#cart').parent().load('index.php?route=common/cart/info');
                 }
             },
+
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
             }

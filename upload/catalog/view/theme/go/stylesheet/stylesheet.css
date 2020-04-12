@@ -414,7 +414,7 @@ select.form-control option, select.form-control optgroup {
 
 .search {
   border-radius: 30px;
-  background: url('../img/search.png') no-repeat center right #fff;
+  background: url('../image/search.png') no-repeat center right #fff;
   border-color: #fff; }
 
 .chosen-container-active .chosen-choices, .chosen-container .chosen-single, .chosen-container-active.chosen-with-drop .chosen-single {
