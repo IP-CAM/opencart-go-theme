@@ -1210,7 +1210,7 @@ pre {
   background-color: #ff0068; }
 
 .pink-theme .filter, .pink-theme .filter .form-control, .pink-theme .filter .form-group label, .pink-theme .float-label .chosen-container-multi .chosen-choices, .pink-theme .float-label .chosen-container-multi .chosen-choices li.search-field input[type=text], .pink-theme .filter .chosen-container-multi .chosen-choices li.search-choice, .pink-theme .btn-default, .pink-theme .sidebar, .pink-theme .sidebar .main-menu .list-group-item, .pink-theme .small-slide .swiper-slide .card:hover *, .pink-theme .small-slide .swiper-slide .card:focus * {
-  color: #fff f !important; }
+  color: #fff !important; }
 
 .pink-theme .filter .form-group label {
   opacity: 0.85; }
