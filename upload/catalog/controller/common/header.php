@@ -79,6 +79,11 @@ class ControllerCommonHeader extends Controller {
         $data['loader'] = $this->load->controller('common/loader');
         $data['sidebar'] = $this->load->controller('common/sidebar');
 
+        // hide bottom bar for auth pages
+        $isLoginOrRegisterRouter = (isset($this->request->get['route']) && $this->request->get['route'] == 'account/login') ||
+            (isset($this->request->get['route']) && $this->request->get['route'] == 'account/register');
+        $data['hide_sidebar'] = $isLoginOrRegisterRouter;
+
 		return $this->load->view('common/header', $data);
 	}
 }

@@ -43,4 +43,6 @@
     {{ cookie }}
 {% endif %}
 {{ loader }}
-{{ sidebar }}
+{% if not hide_sidebar %}
+    {{ sidebar }}
+{% endif %}
