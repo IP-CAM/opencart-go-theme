@@ -10,6 +10,7 @@ class ControllerCommonSidebar extends Controller {
         }
 
         $data['telegram_bot'] = TELEGRAM_BOT;
+        $data['telegram_redirect_url'] = TELEGRAM_REDIRECT_URL;
 
         return $this->load->view('common/sidebar', $data);
     }

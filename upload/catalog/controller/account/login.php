@@ -120,6 +120,7 @@ class ControllerAccountLogin extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['pre_login_text'] = $this->language->get('pre_login_text');
 		$data['telegram_bot'] = TELEGRAM_BOT;
+		$data['telegram_redirect_url'] = TELEGRAM_REDIRECT_URL;
 		$data['sign_in_text'] = $this->language->get('sign_in');
 
 		$this->response->setOutput($this->load->view('account/login', $data));
@@ -212,4 +213,9 @@ class ControllerAccountLogin extends Controller {
 			$this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
 		}
 	}
+
+	public function telegram() {
+	    $this->response->addHeader('Content-Type: application/json');
+	    $this->response->setOutput(json_encode($this->request->get));
+    }
 }
