@@ -58,6 +58,12 @@ class ModelAccountCustomer extends Model {
 		return $query->row;
 	}
 
+    public function getCustomerByTelegramId($telegramId) {
+	    // we save telegram id in email field
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($telegramId)) . "'");
+        return $query->row;
+    }
+
 	public function getCustomerByCode($code) {
 		$query = $this->db->query("SELECT customer_id, firstname, lastname, email FROM `" . DB_PREFIX . "customer` WHERE code = '" . $this->db->escape($code) . "' AND code != ''");
 

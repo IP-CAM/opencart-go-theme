@@ -2,9 +2,9 @@
     <div class="text-center">
         {% if logged %}
             <div class="figure-menu shadow">
-                <figure><img src="{{ account_image }}" alt=""></figure>
+                <figure><img src="{{ customer.image }}" alt=""></figure>
             </div>
-            <h5 class="mb-1 ">{{ account_initial }}</h5>
+            <h5 class="mb-1 ">{{ customer.firstname }} {{ customer.lastname }}</h5>
         {% else %}
             <div class="mb-5"></div>
             <script async src="https://telegram.org/js/telegram-widget.js?8" data-telegram-login="{{ telegram_bot }}"

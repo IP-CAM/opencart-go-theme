@@ -214,8 +214,113 @@ class ControllerAccountLogin extends Controller {
 		}
 	}
 
-	public function telegram() {
-	    $this->response->addHeader('Content-Type: application/json');
-	    $this->response->setOutput(json_encode($this->request->get));
+    public function telegram() {
+        if ($this->customer->isLogged()) {
+            $accountPage = $this->url->link('account/account', 'language=' . $this->config->get('config_language'));
+            $this->response->redirect($accountPage);
+        }
+
+        $this->load->language('account/login');
+
+        $this->document->setTitle($this->language->get('heading_title'));
+
+        $this->load->model('account/customer');
+
+        $telegramData = $this->validateTelegramAuthorization();
+        if (!is_string($telegramData)) {
+            // Unset guest
+            unset($this->session->data['guest']);
+
+            // Default Shipping Address
+            $this->load->model('account/address');
+
+            if ($this->config->get('config_tax_customer') == 'payment') {
+                $this->session->data['payment_address'] = $this->model_account_address->getAddress($this->customer->getAddressId());
+            }
+
+            if ($this->config->get('config_tax_customer') == 'shipping') {
+                $this->session->data['shipping_address'] = $this->model_account_address->getAddress($this->customer->getAddressId());
+            }
+
+            // Wishlist
+            if (isset($this->session->data['wishlist']) && is_array($this->session->data['wishlist'])) {
+                $this->load->model('account/wishlist');
+
+                foreach ($this->session->data['wishlist'] as $key => $product_id) {
+                    $this->model_account_wishlist->addWishlist($product_id);
+
+                    unset($this->session->data['wishlist'][$key]);
+                }
+            }
+
+            // Log the IP info
+            $this->model_account_customer->addLogin($this->customer->getId(), $this->request->server['REMOTE_ADDR']);
+
+            // Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
+            /*if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false)) {
+                $this->response->redirect(str_replace('&amp;', '&', $this->request->post['redirect']));
+            } else {
+                $this->response->redirect($this->url->link('account/account', 'language=' . $this->config->get('config_language')));
+            }*/
+        } else {
+            if ($telegramData === 'DATA_IS_NOT_FROM_TELEGRAM') {
+                $data['error_warning'] = 'Data is not from telegram';
+            } else {
+                $data['error_warning'] = 'Data is outdated';
+            }
+        }
+
+        // check user exists by given telegram id
+        $telegramCustomer = $this->model_account_customer->getCustomerByTelegramId($telegramData['id']);
+        $randomPassword = uniqid();
+        if (!$telegramCustomer) {
+            // user is not saved yet to database, so save it first
+            $newCustomer = array();
+
+            $newCustomer['firstname'] = $telegramData['first_name'];
+            $newCustomer['lastname'] = $telegramData['last_name'];
+            $newCustomer['email'] = $telegramData['id'];
+            $newCustomer['password'] = $randomPassword;
+            $newCustomer['custom_field'] = ['account' => ['image' => $telegramData['photo_url']]];
+            $newCustomer['telephone'] = '';
+
+            $this->model_account_customer->addCustomer($newCustomer);
+        }
+
+        if (!$this->customer->login($telegramData['id'], $randomPassword, true)) {
+            $this->error['warning'] = $this->language->get('error_login');
+
+            $this->model_account_customer->addLoginAttempt($telegramData['id']);
+            $this->response->redirect($this->url->link('account/login', 'language=' . $this->config->get('config_language')));
+        } else {
+            $this->model_account_customer->deleteLoginAttempts($telegramData['id']);
+        }
+
+        // redirect to
+        $this->response->redirect($this->url->link('common/home', 'language=' . $this->config->get('config_language')));
     }
+
+    private function validateTelegramAuthorization() {
+        $auth_data = $this->request->get;
+        //        $check_hash = $auth_data['hash'];
+        //        unset($auth_data['hash']);
+        //        $data_check_arr = [];
+        //        foreach ($auth_data as $key => $value) {
+        //            $data_check_arr[] = $key . '=' . $value;
+        ////            $data_check_arr[] = $key . '=' . str_replace('https:/t', 'https://t', $value);
+        //        }
+        //        sort($data_check_arr);
+        //        $data_check_string = implode("\n", $data_check_arr);
+        //        $secret_key = hash('sha256', TELEGRAM_BOT_TOKEN, true);
+        //        $hash = hash_hmac('sha256', $data_check_string, $secret_key);
+        //        return ['a' => $hash, 'b' => $check_hash];
+        //        if (strcmp($hash, $check_hash) !== 0) {
+        //            return 'DATA_IS_NOT_FROM_TELEGRAM';
+        //        }
+        //        if ((time() - $auth_data['auth_date']) > 86400) {
+        //            return 'DATA_IS_OUTDATED';
+        //        }
+        return $auth_data;
+    }
+
 }
