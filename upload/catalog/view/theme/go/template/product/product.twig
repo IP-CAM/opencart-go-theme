@@ -49,8 +49,7 @@
             </div>
         {% endif %}
         <button class="btn btn-sm btn-link p-0"><i class="material-icons md-18">favorite_outline</i></button>
-        <a href="javascript:void(0)" class="btn btn-sm btn-default btn-rounded ml-2 text-white" data-toggle="modal"
-           data-target="#share"><i class="material-icons mb-18 mr-2">share</i>Share</a>
+        <a target="_blank" href="{{ share_href }}" class="btn btn-sm btn-default btn-rounded ml-2 text-white"><i class="material-icons mb-18 mr-2">share</i>Share</a>
         <div class="badge badge-success float-right mt-1">10% off</div>
 
         <p class="text-secondary my-3 small">
@@ -62,7 +61,7 @@
             <span class="text-dark vm ml-2">Rating 4.2</span> <span class="vm">based on 245 reviews</span>
         </p>
 
-        <a href="#" class="text-dark mb-1 mt-2 h6 d-block">Red Apple
+        <a href="#" class="text-dark mb-1 mt-2 h6 d-block">{{product.name}}
             <span class="small float-right badge bg-warning">
                     <i class="material-icons h5 mb-0">timer</i>
                     <span id="timer" class="vm">

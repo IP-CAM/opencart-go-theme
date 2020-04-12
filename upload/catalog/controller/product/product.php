@@ -214,6 +214,9 @@ class ControllerProductProduct extends Controller {
 				'href' => $this->url->link('product/product', 'language=' . $this->config->get('config_language') . $url . '&product_id=' . $this->request->get['product_id'])
 			);
 
+            $share_href = $this->url->link('product/product', 'product_id=' . $product_info['product_id']);
+            $data['share_href'] = 'https://t.me/share/url?url=' . rawurlencode($share_href) . '&text=' . rawurlencode($product_info['name']);
+
 			$this->document->setTitle($product_info['meta_title']);
 			$this->document->setDescription($product_info['meta_description']);
 			$this->document->setKeywords($product_info['meta_keyword']);
