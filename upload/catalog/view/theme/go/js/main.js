@@ -131,7 +131,7 @@ $(document).ready(function () {
                 }
             });
         }
-    }(jQuery))
+    }(jQuery));
 
     $.dragScroll();
     /* End of drag and scroll like mobile remove while creating mobile app */
