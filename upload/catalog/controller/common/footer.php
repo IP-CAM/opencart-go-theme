@@ -70,6 +70,10 @@ class ControllerCommonFooter extends Controller {
 		$data['scripts'] = $this->document->getScripts('footer');
         $data['cart_count'] = $this->cart->countProducts();
 
+        $isLoginOrRegisterRouter = (isset($this->request->get['route']) && $this->request->get['route'] == 'account/login') ||
+            (isset($this->request->get['route']) && $this->request->get['route'] == 'account/register');
+        $data['hide_bottom_menu'] = $isLoginOrRegisterRouter;
+
 		return $this->load->view('common/footer', $data);
 	}
 }

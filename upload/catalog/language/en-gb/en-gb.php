@@ -69,7 +69,8 @@ $_['error_upload_7']        = 'Warning: Failed to write file to disk!';
 $_['error_upload_8']        = 'Warning: File upload stopped by extension!';
 $_['error_upload_999']      = 'Warning: No error code available!';
 $_['error_curl']            = 'CURL: Error Code(%s): %s';
-
+$_['pre_login_text']        = 'By creating an account you will be able to shop faster, be up to date on an order\'s status, and keep track of the orders you have previously made.';
+$_['sign_in']               = '<span class="font-weight-light">Sign</span> In';
 /* When doing translations only include the matching language code */
 
 // Datepicker

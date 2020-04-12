@@ -118,6 +118,9 @@ class ControllerAccountLogin extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
+		$data['pre_login_text'] = $this->language->get('pre_login_text');
+		$data['telegram_bot'] = TELEGRAM_BOT;
+		$data['sign_in_text'] = $this->language->get('sign_in');
 
 		$this->response->setOutput($this->load->view('account/login', $data));
 	}
