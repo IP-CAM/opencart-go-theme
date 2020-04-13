@@ -1,118 +1,73 @@
 {{ header }}
-<div id="checkout-checkout" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
-  {% if error_warning %}
-    <div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> {{ error_warning }}
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
+<div class="wrapper">
+    <div class="header">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <button class="btn  btn-link text-dark menu-btn"><img src="catalog/view/theme/go/image/menu.png" alt=""><span
+                            class="new-notification"></span></button>
+            </div>
+            <div class="col text-center"><h3 class="header-logo mt-3">HIRO</h3></div>
+            <div class="col-auto">
+                <a href="index.php?route=account/login" class="btn  btn-link text-dark"><i class="material-icons">account_circle</i></a>
+            </div>
+        </div>
     </div>
-  {% endif %}
-  <div class="row">{{ column_left }}
-    <div id="content" class="col">
-      {{ content_top }}
-      <h1>{{ heading_title }}</h1>
-      <div id="accordion">
-        <div class="card">
-          <h4 id="heading-checkout-option" data-target="#collapse-checkout-option" class="card-header collapsed">{{ text_checkout_option }}</h4>
-          <div id="collapse-checkout-option" class="collapse" data-parent="#accordion">
-            <div class="card-body"></div>
-          </div>
+    <div id="checkout-checkout" class="container">
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="textinput">Shipping address</label>
+                    <input type="text" class="form-control form-control-lg" id="textinput">
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Comments</label>
+                    <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            </div>
         </div>
-        <div class="card">
-          {% if not logged and account != 'guest' %}
-            <h4 id="heading-payment-address" class="card-header collapsed" data-target="#collapse-payment-address">{{ text_checkout_account }}</h4>
-            <div id="collapse-payment-address" class="collapse" data-parent="#accordion">
-              <div class="card-body"></div>
+
+        <div class="card border-0 shadow-sm mt-3">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-4">
+                        <p class="text-secondary mb-1 small">Sub Total</p>
+                        <h5 class="mb-0">$360.00</h5>
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="text-secondary mb-1 small">Tax</p>
+                        <h5 class="mb-0">$40.00</h5>
+                    </div>
+                    <div class="col-4 text-right">
+                        <p class="text-secondary mb-1 small">Discount</p>
+                        <h5 class="mb-0">-$100.00</h5>
+                    </div>
+                </div>
             </div>
-          {% else %}
-            <h4 id="heading-payment-address" class="card-header collapsed" data-target="#collapse-payment-address">{{ text_checkout_account }}</h4>
-            <div id="collapse-payment-address" class="collapse" data-parent="#accordion">
-              <div class="card-body"></div>
-            </div>
-          {% endif %}
         </div>
-        {% if shipping_required %}
-          <div class="card">
-            <h4 id="heading-shipping-address" class="card-header collapsed" data-target="#collapse-shipping-address">{{ text_checkout_shipping_address }}</h4>
-            <div id="collapse-shipping-address" class="collapse" data-parent="#accordion">
-              <div class="card-body"></div>
+        <div class="card mb-4 border-0 shadow-sm border-top-dashed">
+            <div class="card-body text-center">
+                <p class="text-secondary my-1">Net Payable</p>
+                <h3 class="mb-0">$400.00</h3>
             </div>
-          </div>
-          <div class="card">
-            <h4 id="heading-shipping-method" class="card-header collapsed" data-target="#collapse-shipping-method">{{ text_checkout_shipping_method }}</h4>
-            <div id="collapse-shipping-method" class="collapse" data-parent="#accordion">
-              <div class="card-body"></div>
+        </div>
+        <p class="text-center text-secondary mb-0">Pay with</p>
+
+        <div class="btn-group mt-4 w-100" role="group" aria-label="Basic example">
+            <a href="javascript:void(0)" class="btn btn-light active">Cash</a>
+            <a href="javascript:void(0)" class="btn btn-light">Payme</a>
+        </div>
+
+        <a href=""
+           class="btn btn-lg btn-default text-white btn-block btn-rounded shadow mt-4"><span>Complete Order</span><i
+                    class="material-icons">arrow_forward</i></a>
+        {% if error_warning %}
+            <div class="alert alert-danger alert-dismissible"><i
+                        class="fas fa-exclamation-circle"></i> {{ error_warning }}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
-          </div>
         {% endif %}
-        <div class="card">
-          <h4 id="heading-payment-method" class="card-header collapsed" data-target="#collapse-payment-method">{{ text_checkout_payment_method }}</h4>
-          <div id="collapse-payment-method" class="collapse" data-parent="#accordion">
-            <div class="card-body"></div>
-          </div>
-        </div>
-        <div class="card">
-          <h4 id="heading-checkout-confirm" class="card-header collapsed" data-target="#collapse-checkout-confirm">{{ text_checkout_confirm }}</h4>
-          <div id="collapse-checkout-confirm" class="collapse" data-parent="#accordion">
-            <div class="card-body"></div>
-          </div>
-        </div>
-      </div>
-      {{ content_bottom }}
     </div>
-    {{ column_right }}
-  </div>
 </div>
-<script type="text/javascript"><!--
-$('#collapse-checkout-option').on('change', 'input[name=\'account\']', function() {
-	if (this.value == 'register') {
-		$('#heading-payment-address').html('{{ text_checkout_account }}');
-	} else {
-		$('#heading-payment-address').html('{{ text_checkout_payment_address }}');
-	}
-});
-
-{% if not logged %}
-$(document).ready(function() {
-	chain.attach(function() {
-		return $.ajax({
-			url: 'index.php?route=checkout/login',
-			dataType: 'html',
-			success: function(html) {
-				$('#collapse-checkout-option .card-body').html(html);
-
-				$('#heading-checkout-option').attr('data-toggle', 'collapse');
-
-				$('#heading-checkout-option').trigger('click');
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
-		});
-	});
-});
-{% else %}
-$(document).ready(function() {
-	chain.attach(function() {
-		return $.ajax({
-			url: 'index.php?route=checkout/payment_address',
-			dataType: 'html',
-			success: function(html) {
-				$('#collapse-payment-address .card-body').html(html);
-
-				$('#heading-payment-address').attr('data-toggle', 'collapse');
-
-				$('#heading-payment-address').trigger('click');
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
-		});
-	});
-});
-{% endif %}
-//--></script>
 {{ footer }}
