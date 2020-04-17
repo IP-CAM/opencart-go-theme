@@ -91,7 +91,7 @@ $(document).ready(function () {
 
 
     /* drag and scroll like mobile remove while creating mobile app */
-    (function ($) {
+    /*(function ($) {
         $.dragScroll = function (options) {
             var settings = $.extend({
                 scrollVertical: true,
@@ -133,7 +133,7 @@ $(document).ready(function () {
         }
     }(jQuery));
 
-    $.dragScroll();
+    $.dragScroll();*/
     /* End of drag and scroll like mobile remove while creating mobile app */
 });
 

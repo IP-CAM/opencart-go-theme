@@ -13,11 +13,25 @@
         </div>
     </div>
     <div id="checkout-checkout" class="container">
+        <div id="map_container">
+            <div id="placemaker">
+                <i class="material-icons text-default">room</i>
+            </div>
+            <div id="map_bottom_actions">
+                <h3 id="location_text" class="text-default text-center"></h3>
+                <button class="btn btn-default">Confirm location</button>
+            </div>
+            <div id="map"></div>
+        </div>
         <div class="row mt-4">
             <div class="col-12">
-                <div class="form-group">
-                    <label for="textinput">Shipping address</label>
-                    <input type="text" class="form-control form-control-lg" id="textinput">
+                <label for="location_suggest">Username</label>
+                <div class="input-group mb-4">
+                    <input type="text" class="form-control form-control-lg" id="location_suggest"
+                           style="border-radius: 6px 0 0 6px">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupPrepend3">Select on map</span>
+                    </div>
                 </div>
             </div>
             <div class="col-12">
@@ -69,5 +83,38 @@
             </div>
         {% endif %}
     </div>
+
+    <script>
+        function onLoad(ymaps) {
+
+            var map = new ymaps.Map("map", {
+                center: [55.76, 37.64],
+                zoom: 12,
+                controls: ['fullscreenControl', 'searchControl', 'zoomControl'],
+            });
+
+            ymaps.geolocation.get({
+                provider: 'browser',
+                mapStateAutoApply: true,
+                zoom: 12,
+            }).then(function (result) {
+                /**
+                 * We'll mark the position obtained through the browser in blue.
+                 * If the browser does not support this functionality, the placemark will not be added to the map.
+                 */
+                map.setCenter(result.geoObjects.position);
+            });
+
+            map.events.add('actionend', function (e) {
+                var coords = map.getCenter();
+                var geocoder = ymaps.geocode(coords).then(function (res) {
+                    var geoObject = res.geoObjects.get(0).properties.get('metaDataProperty');
+                    $('#location_text').html(geoObject.GeocoderMetaData.text);
+                }).catch(console.warn);
+            });
+
+            var suggestView = new ymaps.SuggestView('location_suggest');
+        }
+    </script>
 </div>
 {{ footer }}

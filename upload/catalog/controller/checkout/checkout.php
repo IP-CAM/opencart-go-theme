@@ -1,52 +1,57 @@
 <?php
-class ControllerCheckoutCheckout extends Controller {
-	public function index() {
-		// Validate cart has products and has stock.
-		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
-			$this->response->redirect($this->url->link('checkout/cart', 'language=' . $this->config->get('config_language')));
-		}
 
-		// Validate minimum quantity requirements.
-		$products = $this->cart->getProducts();
+class ControllerCheckoutCheckout extends Controller
+{
+    public function index()
+    {
+        // Validate cart has products and has stock.
+        if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
+            $this->response->redirect($this->url->link('checkout/cart', 'language=' . $this->config->get('config_language')));
+        }
 
-		foreach ($products as $product) {
-			$product_total = 0;
+        // Validate minimum quantity requirements.
+        $products = $this->cart->getProducts();
 
-			foreach ($products as $product_2) {
-				if ($product_2['product_id'] == $product['product_id']) {
-					$product_total += $product_2['quantity'];
-				}
-			}
+        foreach ($products as $product) {
+            $product_total = 0;
 
-			if ($product['minimum'] > $product_total) {
-				$this->response->redirect($this->url->link('checkout/cart', 'language=' . $this->config->get('config_language')));
-			}
-		}
+            foreach ($products as $product_2) {
+                if ($product_2['product_id'] == $product['product_id']) {
+                    $product_total += $product_2['quantity'];
+                }
+            }
 
-		$this->load->language('checkout/checkout');
+            if ($product['minimum'] > $product_total) {
+                $this->response->redirect($this->url->link('checkout/cart', 'language=' . $this->config->get('config_language')));
+            }
+        }
 
-		$this->document->setTitle($this->language->get('heading_title'));
+        $this->load->language('checkout/checkout');
 
-		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js');
-		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js');
-		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
-		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
+        $this->document->setTitle($this->language->get('heading_title'));
+
+        $this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js');
+        $this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js');
+        $this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
+        $this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
+        $mapElements = 'SuggestView,geolocation,Map,Placemark';
+        $this->document->addScript('https://api-maps.yandex.ru/2.1/?apikey=' . YANDEX_MAPS_API_KEY . '&lang=en_US&onload=onLoad');
 
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('common / home', 'language = ' . $this->config->get('config_language'))
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_cart'),
-			'href' => $this->url->link('checkout/cart', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('checkout / cart', 'language = ' . $this->config->get('config_language'))
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('checkout/checkout', 'language=' . $this->config->get('config_language'))
+			'href' => $this->url->link('checkout / checkout', 'language = ' . $this->config->get('config_language'))
 		);
 
 		$data['text_checkout_option'] = sprintf($this->language->get('text_checkout_option'), 1);
@@ -80,25 +85,25 @@ class ControllerCheckoutCheckout extends Controller {
 
 		$data['shipping_required'] = $this->cart->hasShipping();
 
-		$data['column_left'] = $this->load->controller('common/column_left');
-		$data['column_right'] = $this->load->controller('common/column_right');
-		$data['content_top'] = $this->load->controller('common/content_top');
-		$data['content_bottom'] = $this->load->controller('common/content_bottom');
-		$data['footer'] = $this->load->controller('common/footer');
-		$data['header'] = $this->load->controller('common/header');
+		$data['column_left'] = $this->load->controller('common / column_left');
+		$data['column_right'] = $this->load->controller('common / column_right');
+		$data['content_top'] = $this->load->controller('common / content_top');
+		$data['content_bottom'] = $this->load->controller('common / content_bottom');
+		$data['footer'] = $this->load->controller('common / footer');
+		$data['header'] = $this->load->controller('common / header');
 
-		$this->response->setOutput($this->load->view('checkout/checkout', $data));
+		$this->response->setOutput($this->load->view('checkout / checkout', $data));
 	}
 
 	public function country() {
 		$json = array();
 
-		$this->load->model('localisation/country');
+		$this->load->model('localisation / country');
 
 		$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
 
 		if ($country_info) {
-			$this->load->model('localisation/zone');
+			$this->load->model('localisation / zone');
 
 			$json = array(
 				'country_id'        => $country_info['country_id'],
@@ -112,14 +117,14 @@ class ControllerCheckoutCheckout extends Controller {
 			);
 		}
 
-		$this->response->addHeader('Content-Type: application/json');
+		$this->response->addHeader('Content - Type: application / json');
 		$this->response->setOutput(json_encode($json));
 	}
 
 	public function customfield() {
 		$json = array();
 
-		$this->load->model('account/custom_field');
+		$this->load->model('account / custom_field');
 
 		// Customer Group
 		if (isset($this->request->get['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->get['customer_group_id'], $this->config->get('config_customer_group_display'))) {
@@ -137,7 +142,7 @@ class ControllerCheckoutCheckout extends Controller {
 			);
 		}
 
-		$this->response->addHeader('Content-Type: application/json');
+		$this->response->addHeader('Content - Type: application / json');
 		$this->response->setOutput(json_encode($json));
 	}
 }
