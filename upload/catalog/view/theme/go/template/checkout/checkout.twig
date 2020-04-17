@@ -13,16 +13,6 @@
         </div>
     </div>
     <div id="checkout-checkout" class="container">
-        <div id="map_container">
-            <div id="placemaker">
-                <i class="material-icons text-default">room</i>
-            </div>
-            <div id="map_bottom_actions">
-                <h3 id="location_text" class="text-default text-center"></h3>
-                <button class="btn btn-default">Confirm location</button>
-            </div>
-            <div id="map"></div>
-        </div>
         <div class="row mt-4">
             <div class="col-12">
                 <label for="location_suggest">Username</label>
@@ -30,7 +20,7 @@
                     <input type="text" class="form-control form-control-lg" id="location_suggest"
                            style="border-radius: 6px 0 0 6px">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupPrepend3">Select on map</span>
+                        <button data-toggle="modal" data-target="#map_center_modal" class="input-group-text" id="inputGroupPrepend3">Select on map</button>
                     </div>
                 </div>
             </div>
@@ -83,7 +73,6 @@
             </div>
         {% endif %}
     </div>
-
     <script>
         function onLoad(ymaps) {
 
@@ -116,5 +105,23 @@
             var suggestView = new ymaps.SuggestView('location_suggest');
         }
     </script>
+</div>
+<div class="modal fade" id="map_center_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content shadow">
+            <div class="modal-body text-center p-0">
+                <div id="map_container">
+                    <div id="placemaker">
+                        <i class="material-icons text-default">room</i>
+                    </div>
+                    <div id="map_bottom_actions">
+                        <h5 id="location_text" class="text-center"></h5>
+                        <button class="btn btn-default">Confirm</button>
+                    </div>
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {{ footer }}

@@ -2187,3 +2187,10 @@ pre {
   width: 100%;
   padding: 0 33.333333%;
 }
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    max-width: 700px;
+    margin: 1.75rem auto;
+  }
+}
