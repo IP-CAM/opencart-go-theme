@@ -74,6 +74,7 @@
         {% endif %}
     </div>
     <script>
+        var userSelectedLocation = '';
         function onLoad(ymaps) {
 
             var map = new ymaps.Map("map", {
@@ -92,18 +93,30 @@
                  * If the browser does not support this functionality, the placemark will not be added to the map.
                  */
                 map.setCenter(result.geoObjects.position);
+                var geoObject = result.geoObjects.get(0).properties.get('metaDataProperty');
+                userSelectedLocation = geoObject.GeocoderMetaData.text;
+                $('#location_suggest')[0].value = userSelectedLocation;
             });
 
             map.events.add('actionend', function (e) {
                 var coords = map.getCenter();
                 var geocoder = ymaps.geocode(coords).then(function (res) {
                     var geoObject = res.geoObjects.get(0).properties.get('metaDataProperty');
-                    $('#location_text').html(geoObject.GeocoderMetaData.text);
+                    userSelectedLocation = geoObject.GeocoderMetaData.text;
+                    $('#location_text').html(userSelectedLocation);
                 }).catch(console.warn);
             });
 
             var suggestView = new ymaps.SuggestView('location_suggest');
+
+            $('#map_center_modal').on('shown.bs.modal', function() {
+                $('#location_confirm_button').on('click', function () {
+                    $('#location_suggest')[0].value = userSelectedLocation;
+                    $('#map_center_modal').modal('hide');
+                });
+            });
         }
+
     </script>
 </div>
 <div class="modal fade" id="map_center_modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -116,7 +129,7 @@
                     </div>
                     <div id="map_bottom_actions">
                         <h5 id="location_text" class="text-center"></h5>
-                        <button class="btn btn-default">Confirm</button>
+                        <button id="location_confirm_button" class="btn btn-default">Confirm</button>
                     </div>
                     <div id="map"></div>
                 </div>
