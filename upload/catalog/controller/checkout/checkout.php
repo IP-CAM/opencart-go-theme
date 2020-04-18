@@ -34,6 +34,7 @@ class ControllerCheckoutCheckout extends Controller
         $this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js');
         $this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
         $this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
+        $this->document->addScript('catalog/view/theme/go/js/jquery.inputmask.min.js', 'header');
         $mapElements = 'SuggestView,geolocation,Map,Placemark';
         $this->document->addScript('https://api-maps.yandex.ru/2.1/?apikey=' . YANDEX_MAPS_API_KEY . '&lang=en_US&onload=onLoad');
 

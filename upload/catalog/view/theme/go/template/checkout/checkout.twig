@@ -62,11 +62,14 @@
 
         <div class="btn-group mt-4 w-100" role="group" aria-label="Basic example">
             <button role="button" onclick="onPaymentSelect('cash', '#payment_method_cash')" id="payment_method_cash"
-               class="btn btn-light active payment_btn">Cash</button>
-            <button role="button" onclick="onPaymentSelect('payme', '#payment_method_payme')" class="btn btn-light payment_btn"
-               data-toggle="collapse"
-               id="payment_method_payme"
-               aria-expanded="false" aria-controls="card-collapse">Payme</button>
+                    class="btn btn-light active payment_btn">Cash
+            </button>
+            <button role="button" onclick="onPaymentSelect('payme', '#payment_method_payme')"
+                    class="btn btn-light payment_btn"
+                    data-toggle="collapse"
+                    id="payment_method_payme"
+                    aria-expanded="false" aria-controls="card-collapse">Payme
+            </button>
         </div>
 
         <div class="collapse multi-collapse" id="card-collapse">
@@ -98,6 +101,11 @@
         {% endif %}
     </div>
     <script>
+        $(document).ready(function () {
+            $('#card_number').inputmask('9999  9999  9999  9999');
+            $('#card_expire').inputmask('99 / 99');
+        });
+
         function onPaymentSelect(payment_method, id) {
             $('.payment_btn').removeClass('active');
 
