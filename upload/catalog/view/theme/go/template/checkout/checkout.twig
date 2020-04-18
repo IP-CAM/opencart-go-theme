@@ -61,8 +61,30 @@
         <p class="text-center text-secondary mb-0">Pay with</p>
 
         <div class="btn-group mt-4 w-100" role="group" aria-label="Basic example">
-            <a href="javascript:void(0)" class="btn btn-light active">Cash</a>
-            <a href="javascript:void(0)" class="btn btn-light">Payme</a>
+            <button role="button" onclick="onPaymentSelect('cash', '#payment_method_cash')" id="payment_method_cash"
+               class="btn btn-light active payment_btn">Cash</button>
+            <button role="button" onclick="onPaymentSelect('payme', '#payment_method_payme')" class="btn btn-light payment_btn"
+               data-toggle="collapse"
+               id="payment_method_payme"
+               aria-expanded="false" aria-controls="card-collapse">Payme</button>
+        </div>
+
+        <div class="collapse multi-collapse" id="card-collapse">
+            <div class="row mt-4">
+                <div class="col-sm-9">
+                    <label for="card_number">Card Number</label>
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control form-control-lg" id="card_number">
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="card_expire">Card Expire</label>
+                    <div class="input-group mb-4">
+                        <input type="text" class="form-control form-control-lg" id="card_expire">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <a href=""
@@ -76,6 +98,18 @@
         {% endif %}
     </div>
     <script>
+        function onPaymentSelect(payment_method, id) {
+            $('.payment_btn').removeClass('active');
+
+            var paymentBtn = $(id).addClass('active');
+
+            if (payment_method === 'cash') {
+                $('#card-collapse').collapse('hide');
+            } else if (payment_method === 'payme') {
+                $('#card-collapse').collapse('show');
+            }
+        }
+
         var userSelectedLocation = '';
 
         function onLoad(ymaps) {
