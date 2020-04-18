@@ -20,7 +20,9 @@
                     <input type="text" class="form-control form-control-lg" id="location_suggest"
                            style="border-radius: 6px 0 0 6px">
                     <div class="input-group-prepend">
-                        <button data-toggle="modal" data-target="#map_center_modal" class="input-group-text" id="inputGroupPrepend3">Select on map</button>
+                        <button data-toggle="modal" data-target="#map_center_modal" class="input-group-text"
+                                id="inputGroupPrepend3">Select on map
+                        </button>
                     </div>
                 </div>
             </div>
@@ -75,12 +77,13 @@
     </div>
     <script>
         var userSelectedLocation = '';
+
         function onLoad(ymaps) {
 
             var map = new ymaps.Map("map", {
                 center: [55.76, 37.64],
                 zoom: 12,
-                controls: ['fullscreenControl', 'searchControl', 'zoomControl'],
+                controls: ['fullscreenControl', 'searchControl', 'zoomControl', 'geolocationControl'],
             });
 
             ymaps.geolocation.get({
@@ -109,7 +112,7 @@
 
             var suggestView = new ymaps.SuggestView('location_suggest');
 
-            $('#map_center_modal').on('shown.bs.modal', function() {
+            $('#map_center_modal').on('shown.bs.modal', function () {
                 $('#location_confirm_button').on('click', function () {
                     $('#location_suggest')[0].value = userSelectedLocation;
                     $('#map_center_modal').modal('hide');
