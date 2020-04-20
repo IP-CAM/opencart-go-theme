@@ -16,6 +16,20 @@ class ControllerExtensionPaymentCod extends Controller {
 		}
 		
 		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));		
+		$this->response->setOutput(json_encode($json));
 	}
+
+	public function confirm2() {
+        $json = array();
+
+        if ($this->session->data['payment_method']['code'] == 'cod') {
+            $this->load->model('checkout/order');
+
+            $this->model_checkout_order->addHistory($this->session->data['order_id'], $this->config->get('payment_cod_order_status_id'));
+
+            $json['redirect'] = $this->url->link('checkout/success', 'language=' . $this->config->get('config_language'));
+        }
+
+        return $json;
+    }
 }
