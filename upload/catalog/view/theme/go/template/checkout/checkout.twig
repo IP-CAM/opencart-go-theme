@@ -21,7 +21,7 @@
                         <input name="shipping_address" type="text" class="form-control form-control-lg" id="location_suggest"
                                style="border-radius: 6px 0 0 6px">
                         <div class="input-group-prepend">
-                            <button data-toggle="modal" data-target="#map_center_modal" class="input-group-text"
+                            <button type="button" data-toggle="modal" data-target="#map_center_modal" class="input-group-text"
                                     id="inputGroupPrepend3">Select on map
                             </button>
                         </div>
@@ -64,10 +64,10 @@
 
             <div class="btn-group mt-4 w-100" role="group" aria-label="Basic example">
                 <input type="hidden" name="payment_method" value="cash" id="payment_method">
-                <button role="button" onclick="onPaymentSelect('cash', '#payment_method_cash')" id="payment_method_cash"
+                <button role="button" type="button" onclick="onPaymentSelect('cash', '#payment_method_cash'); return false;" id="payment_method_cash"
                         class="btn btn-light active payment_btn">Cash
                 </button>
-                <button role="button" onclick="onPaymentSelect('payme', '#payment_method_payme')"
+                <button role="button" type="button" onclick="onPaymentSelect('payme', '#payment_method_payme'); return false;"
                         class="btn btn-light payment_btn"
                         data-toggle="collapse"
                         id="payment_method_payme"
