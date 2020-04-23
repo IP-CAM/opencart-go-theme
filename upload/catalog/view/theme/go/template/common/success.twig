@@ -1,10 +1,23 @@
 {{ header }}
+<div class="wrapper">
+  <div class="header">
+    <div class="row no-gutters">
+      <div class="col-auto">
+        <button class="btn  btn-link text-dark menu-btn"><img src="catalog/view/theme/go/image/menu.png" alt=""><span
+                  class="new-notification"></span></button>
+      </div>
+      <div class="col text-center"><h3 class="header-logo mt-3">HIRO</h3></div>
+      <div class="col-auto">
+        <a href="index.php?route=account/login" class="btn  btn-link text-dark"><i class="material-icons">account_circle</i></a>
+      </div>
+    </div>
+  </div>
 <div id="common-success" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+{#  <ul class="breadcrumb">#}
+{#    {% for breadcrumb in breadcrumbs %}#}
+{#      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>#}
+{#    {% endfor %}#}
+{#  </ul>#}
   <div class="row">{{ column_left }}
     <div id="content" class="col">{{ content_top }}
       <h1>{{ heading_title }}</h1>
@@ -16,3 +29,4 @@
     {{ column_right }}</div>
 </div>
 {{ footer }}
+</div>
