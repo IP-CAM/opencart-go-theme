@@ -1308,7 +1308,7 @@ pre {
   background-size: 100% 100%; }
 
 .blue-theme body, .blue-theme body.sidemenu-open, .blue-theme .bg-template, .blue-theme .btn-default, .blue-theme .custom-control-input:checked ~ .custom-control-label::before, .blue-theme .small-slide .swiper-slide .card:hover, .blue-theme .small-slide .swiper-slide .card:focus, .blue-theme .filter, .blue-theme .chosen-container .chosen-results li.highlighted, .blue-theme .page-item.active .page-link, .blue-theme .nav-pills .nav-link.active, .blue-theme .nav-pills .show > .nav-link, .blue-theme .loader-screen {
-  background-color: #4885ff; }
+  background-color: #18c4c2; }
 
 .blue-theme .filter, .blue-theme .filter .form-control, .blue-theme .filter .form-group label, .blue-theme .float-label .chosen-container-multi .chosen-choices, .blue-theme .float-label .chosen-container-multi .chosen-choices li.search-field input[type=text], .blue-theme .filter .chosen-container-multi .chosen-choices li.search-choice, .blue-theme .btn-default, .blue-theme .sidebar, .blue-theme .sidebar .main-menu .list-group-item, .blue-theme .small-slide .swiper-slide .card:hover *, .blue-theme .small-slide .swiper-slide .card:focus * {
   color: #fff f !important; }
@@ -1321,7 +1321,7 @@ pre {
   background-color: #1b53c4; }
 
 .blue-theme .figure-profile, .blue-theme .form-control:focus, .blue-theme .custom-control-input:focus ~ .custom-control-label::before, .blue-theme .custom-control-input:checked ~ .custom-control-label::before, .blue-theme .float-label .form-control:focus, .blue-theme .page-item.active .page-link, .blue-theme .btn-outline-default {
-  border-color: #4885ff; }
+  border-color: #18c4c2; }
 
 .blue-theme .filter .form-control:focus, .blue-theme .filter .custom-control-input:focus ~ .custom-control-label::before, .blue-theme .filter .custom-control-input:checked ~ .custom-control-label::before, .blue-theme .filter .float-label .form-control:focus {
   border-color: #fff; }
@@ -1333,7 +1333,7 @@ pre {
   background-color: #c8daff; }
 
 .blue-theme .text-template, .blue-theme .btn-link, .blue-theme a, .blue-theme .float-label .form-control:focus + .form-control-label, .blue-theme .btn-light:hover, .blue-theme .btn-light:focus, .blue-theme .btn-light:not(:disabled):not(.disabled).active, .blue-theme .btn.btn-link-default:hover, .blue-theme .btn.btn-link-default:focus, .blue-theme .btn.btn-link-default.active {
-  color: #4885ff; }
+  color: #18c4c2; }
 
 .blue-theme .bg-warning, .blue-theme .badge-warning {
   background-color: #fdd835 !important; }
