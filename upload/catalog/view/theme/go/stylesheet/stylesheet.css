@@ -549,7 +549,8 @@ body a.btn-primary, body a.btn-warning, body a.btn-danger, body a.btn-success {
   color: #fff !important; }
 
 .btn.btn-link-default {
-  color: #bbb; }
+  color: #bbb;
+  fill: #bbb; }
 
 .btn.shadow-sm {
   box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2) !important;
@@ -1333,7 +1334,8 @@ pre {
   background-color: #c8daff; }
 
 .blue-theme .text-template, .blue-theme .btn-link, .blue-theme a, .blue-theme .float-label .form-control:focus + .form-control-label, .blue-theme .btn-light:hover, .blue-theme .btn-light:focus, .blue-theme .btn-light:not(:disabled):not(.disabled).active, .blue-theme .btn.btn-link-default:hover, .blue-theme .btn.btn-link-default:focus, .blue-theme .btn.btn-link-default.active {
-  color: #18c4c2; }
+  color: #18c4c2;
+  fill: #18c4c2; }
 
 .blue-theme .bg-warning, .blue-theme .badge-warning {
   background-color: #fdd835 !important; }
