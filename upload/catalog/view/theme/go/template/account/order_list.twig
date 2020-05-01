@@ -1,53 +1,162 @@
 {{ header }}
-<div id="account-order" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-      <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
-  <div class="row">{{ column_left }}
-    <div id="content" class="col">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
-      {% if orders %}
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <td class="text-right">{{ column_order_id }}</td>
-                <td class="text-left">{{ column_customer }}</td>
-                <td class="text-right">{{ column_product }}</td>
-                <td class="text-left">{{ column_status }}</td>
-                <td class="text-right">{{ column_total }}</td>
-                <td class="text-left">{{ column_date_added }}</td>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody>
-              {% for order in orders %}
-                <tr>
-                  <td class="text-right">#{{ order.order_id }}</td>
-                  <td class="text-left">{{ order.name }}</td>
-                  <td class="text-right">{{ order.products }}</td>
-                  <td class="text-left">{{ order.status }}</td>
-                  <td class="text-right">{{ order.total }}</td>
-                  <td class="text-left">{{ order.date_added }}</td>
-                  <td class="text-right"><a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn btn-info"><i class="fas fa-eye"></i></a></td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+<div class="wrapper">
+    <div class="header">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <button class="btn  btn-link text-dark menu-btn"><img src="catalog/view/theme/go/image/menu.png" alt=""><span
+                            class="new-notification"></span></button>
+            </div>
+            <div class="col text-center"><h3 class="header-logo mt-3">HIRO</h3></div>
+            <div class="col-auto">
+                <a href="index.php?route=account/login" class="btn  btn-link text-dark"><i class="material-icons">account_circle</i></a>
+            </div>
         </div>
+    </div>
+    <div id="account-order" class="container">
+        <div class="subtitle h6">
+            <div class="d-inline-block">
+                My Orders<br>
+                <p class="small text-mute">{{ total_count }} Orders</p>
+            </div>
+        </div>
+
         <div class="row">
-          <div class="col-sm-6 text-left">{{ pagination }}</div>
-          <div class="col-sm-6 text-right">{{ results }}</div>
+            <div class="col-12 px-0">
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item active">
+                        <h6 class="mb-0">15 December 2019</h6>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-auto align-self-center">
+                                <button class="btn btn-sm btn-link text-danger p-0 float-right"><i class="material-icons">delete</i></button>
+                            </div>
+                            <div class="col-2 pl-0 align-self-center">
+                                <figure class="product-image h-auto"><img src="img/apple.png" alt="" class="vm"></figure>
+                            </div>
+                            <div class="col px-0">
+                                <a href="#" class="text-dark mb-1 h6 d-block">Red Apple </a>
+                                <h5 class="text-success font-weight-normal mb-0">$ 120<sup>.00</sup></h5>
+                                <p class="text-secondary small text-mute mb-0">1.0 kg <span class=" text-success ml-2">10% off</span></p>
+                            </div>
+                            <div class="col-auto align-self-center">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-light-grey px-1" type="button"><i class="material-icons">remove</i></button>
+                                    </div>
+                                    <input type="text" class="form-control w-35" placeholder="" value="5">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light-grey px-1" type="button"><i class="material-icons">add</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-auto align-self-center">
+                                <button class="btn btn-sm btn-link text-danger p-0 float-right"><i class="material-icons">delete</i></button>
+                            </div>
+                            <div class="col-2 pl-0 align-self-center">
+                                <figure class="product-image h-auto"><img src="img/grapes2.png" alt="" class="vm"></figure>
+                            </div>
+                            <div class="col px-0">
+                                <a href="#" class="text-dark mb-1 h6 d-block">Green Grapes </a>
+                                <h5 class="text-success font-weight-normal mb-0">$ 120<sup>.00</sup></h5>
+                                <p class="text-secondary small text-mute mb-0">1.0 kg <span class=" text-success ml-2">10% off</span></p>
+                            </div>
+                            <div class="col-auto align-self-center">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-light-grey px-1" type="button"><i class="material-icons">remove</i></button>
+                                    </div>
+                                    <input type="text" class="form-control w-35" placeholder="" value="3">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light-grey px-1" type="button"><i class="material-icons">add</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-auto align-self-center">
+                                <button class="btn btn-sm btn-link text-danger p-0 float-right"><i class="material-icons">delete</i></button>
+                            </div>
+                            <div class="col-2 pl-0 align-self-center">
+                                <figure class="product-image h-auto"><img src="img/orange-2.png" alt="" class="vm"></figure>
+                            </div>
+                            <div class="col px-0">
+                                <a href="#" class="text-dark mb-1 h6 d-block">Orange</a>
+                                <h5 class="text-success font-weight-normal mb-0">$ 120<sup>.00</sup></h5>
+                                <p class="text-secondary small text-mute mb-0">1.0 kg <span class=" text-success ml-2">10% off</span></p>
+                            </div>
+                            <div class="col-auto align-self-center">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-light-grey px-1" type="button"><i class="material-icons">remove</i></button>
+                                    </div>
+                                    <input type="text" class="form-control w-35" placeholder="" value="11">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light-grey px-1" type="button"><i class="material-icons">add</i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="" class="btn btn-lg btn-default text-white btn-block btn-rounded shadow"><span>Update Order</span><i class="material-icons">arrow_forward</i></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      {% else %}
-        <p>{{ text_no_results }}</p>
-      {% endif %}
-      <div class="d-inline-block pt-2 pd-2 w-100">
-        <div class="float-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
-      </div>
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
+
+        <div class="row">{{ column_left }}
+            <div id="content" class="col">{{ content_top }}
+                <h1>{{ heading_title }}</h1>
+                {% if orders %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <td class="text-right">{{ column_order_id }}</td>
+                                <td class="text-left">{{ column_customer }}</td>
+                                <td class="text-right">{{ column_product }}</td>
+                                <td class="text-left">{{ column_status }}</td>
+                                <td class="text-right">{{ column_total }}</td>
+                                <td class="text-left">{{ column_date_added }}</td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td class="text-right">#{{ order.order_id }}</td>
+                                    <td class="text-left">{{ order.name }}</td>
+                                    <td class="text-right">{{ order.products }}</td>
+                                    <td class="text-left">{{ order.status }}</td>
+                                    <td class="text-right">{{ order.total }}</td>
+                                    <td class="text-left">{{ order.date_added }}</td>
+                                    <td class="text-right"><a href="{{ order.view }}" data-toggle="tooltip"
+                                                              title="{{ button_view }}" class="btn btn-info"><i
+                                                    class="fas fa-eye"></i></a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 text-left">{{ pagination }}</div>
+                        <div class="col-sm-6 text-right">{{ results }}</div>
+                    </div>
+                {% else %}
+                    <p>{{ text_no_results }}</p>
+                {% endif %}
+                <div class="d-inline-block pt-2 pd-2 w-100">
+                    <div class="float-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a>
+                    </div>
+                </div>
+                {{ content_bottom }}</div>
+    </div>
+    {{ footer }}
 </div>
-{{ footer }}
