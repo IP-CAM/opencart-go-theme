@@ -21,7 +21,7 @@
     <!-- Swiper -->
     <link rel="stylesheet" href="catalog/view/theme/go/stylesheet/swiper/swiper.min.css">
     <!-- Roboto fonts CSS -->
-{#    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">#}
+    {#    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">#}
     <link href="catalog/view/theme/go/stylesheet/stylesheet.css" rel="stylesheet">
     {% for style in styles %}
         <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}"/>
@@ -46,3 +46,19 @@
 {% if not hide_sidebar %}
     {{ sidebar }}
 {% endif %}
+<div class="wrapper">
+    <div class="header">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <button class="btn  btn-link text-dark menu-btn"><img src="catalog/view/theme/go/image/menu.png" alt=""><span
+                            class="new-notification"></span></button>
+            </div>
+            <div class="col text-center"><h3 class="header-logo mt-3">HIRO</h3></div>
+            <div class="col-auto">
+                {{ language }}
+            </div>
+            <div class="col-auto">
+                <a href="index.php?route=account/login" class="btn  btn-link text-dark"><i class="material-icons">account_circle</i></a>
+            </div>
+        </div>
+    </div>
