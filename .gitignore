@@ -62,3 +62,7 @@ info.php
 # IDE Project files
 /.idea
 /upload/.idea
+
+storage/**
+upload/image/**
+
