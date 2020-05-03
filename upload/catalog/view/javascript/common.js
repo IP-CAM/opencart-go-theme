@@ -147,7 +147,7 @@ $(document).ready(function () {
 
 // Cart add remove functions
 var cart = {
-    'add': function (product_id, quantity, elementId) {
+    'add': function (product_id, quantity, elementId, content, cb) {
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
             type: 'post',
@@ -163,7 +163,15 @@ var cart = {
             },
             complete: function () {
                 if (elementId) {
-                    $(elementId).html('<i class="material-icons md-18">shopping_cart</i>');
+                    if (content) {
+                        $(elementId).html(content);
+                    } else {
+                        $(elementId).html('<i class="material-icons md-18">shopping_cart</i>');
+                    }
+                }
+
+                if (typeof cb === 'function') {
+                    cb();
                 }
             },
             success: function (json) {
