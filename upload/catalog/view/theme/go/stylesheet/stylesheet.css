@@ -1525,3 +1525,6 @@ pre {
   .modal-dialog {
     max-width: 700px;
     margin: 1.75rem auto; } }
+
+#option-container-radio input:checked ~ img {
+  border: 2px solid #0bb1d6; }

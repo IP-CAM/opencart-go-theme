@@ -2198,3 +2198,7 @@ pre {
     margin: 1.75rem auto;
   }
 }
+
+#option-container-radio input:checked ~ img {
+  border: 2px solid #0bb1d6;
+}
