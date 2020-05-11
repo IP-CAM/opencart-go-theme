@@ -191,7 +191,7 @@ var cart = {
                     html += '  <div class="toast-body">' + json['success'] + '</div>';
                     html += '</div>';
 
-                    $('body').append(html);
+                    $('#alert-container').append(html);
 
                     $('#toast').toast({'delay': 3000});
 
