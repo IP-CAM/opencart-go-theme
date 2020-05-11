@@ -1,5 +1,5 @@
 {{ header }}
-<div id="product-product" class="container">
+<div id="product" class="container">
     {% if thumb or images %}
     {% if images %}
         <!-- Swiper -->
@@ -44,11 +44,11 @@
                             <div class="form-check form-check-inline">
                                 <label><input type="radio" name="option[{{ option.product_option_id }}]"
                                               value="{{ option_value.product_option_value_id }}"
-                                              class="form-check-input d-none" />
+                                              class="form-check-input d-none"/>
                                     {% if option_value.image %}<img src="{{ option_value.image }}"
                                                                     alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}"
                                                                     class="img-thumbnail"/>{% endif %}
-{#                                    {{ option_value.name }}#}
+                                    {#                                    {{ option_value.name }}#}
                                     {% if option_value.price %}
                                         ({{ option_value.price_prefix }}{{ option_value.price }})
                                     {% endif %}
@@ -150,6 +150,27 @@
         {% endfor %}
     {% endif %}
 
+    <div class="row">
+        <div class="col-auto align-self-center mb-4">
+            <label for="input-quantity" class="col-form-label">{{ entry_qty }}</label>
+            <div class="input-group input-group-sm" style="width: 200px">
+                <div class="input-group-prepend">
+                    <button onclick="decrementQuantity.call(null, 'input-quantity')"
+                            class="btn btn-light-grey px-1" type="button"><i
+                                class="material-icons">remove</i></button>
+                </div>
+                <input id="input-quantity" type="text" class="form-control w-35" value="{{ minimum }}" size="2"
+                       name="quantity">
+                <input type="hidden" name="product_id" value="{{ product_id }}"/>
+                <div class="input-group-append">
+                    <button onclick="incrementQuantity.call(null, 'input-quantity')"
+                            class="btn btn-light-grey px-1" type="button"><i class="material-icons">add</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <button class="btn btn-sm btn-link p-0"><i class="material-icons md-18">favorite_outline</i></button>
     <a target="_blank" href="{{ share_href }}" class="btn btn-sm btn-default btn-rounded ml-2 text-white"><i
                 class="material-icons mb-18 mr-2">share</i>Share</a>
@@ -170,8 +191,11 @@
             <p class="text-secondary text-mute mb-0">{{ weight | number_format(2) }} kg</p>
         </div>
         <div class="col-auto align-self-center">
-            <button class="btn btn-lg btn-default shadow btn-rounded" data-toggle="modal"
-                    data-target="#addToCartModal">Add <i class="material-icons md-18">shopping_cart</i></button>
+            <button type="button" id="button-cart" data-loading-text="{{ text_loading }}"
+                    class="btn btn-default btn-lg shadow btn-rounded">{{ button_cart }} <i class="material-icons md-18">shopping_cart</i>
+            </button>
+            {#            <button class="btn btn-lg btn-default shadow btn-rounded" data-toggle="modal" id="button-cart"#}
+            {#                    data-target="#addToCartModal">Add <i class="material-icons md-18">shopping_cart</i></button>#}
         </div>
     </div>
 
@@ -274,7 +298,7 @@
                     $('#toast').toast({'delay': 3000});
                     $('#toast').toast('show');
 
-                    $('#cart').parent().load('index.php?route=common/cart/info');
+                    $('#cart').load('index.php?route=common/cart/count');
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -457,54 +481,6 @@
     });
 
 </script>
-</div>
-
-<div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div style="max-width: 300px; margin: 0 auto" class="modal-dialog modal-sm modal-dialog-centered" role="document">
-        <div class="modal-content shadow">
-            <div class="modal-body text-center pr-4 pl-4">
-                <figure class="mt-0 border-0">
-                    <img src="{{ thumb }}" alt="user image">
-                </figure>
-                <h5 class="my-3">{{ heading_title }}</h5>
-                <div class="row mb-4">
-                    <div class="col">
-                        <p class="text-left">Quantity</p>
-                    </div>
-                    <div class="col-auto align-self-center">
-                        <div class="input-group input-group-sm">
-                            <div class="input-group-prepend">
-                                <button onclick="decrementQuantity.call(null, 'product_cart_qty')"
-                                        class="btn btn-light-grey px-1" type="button"><i
-                                            class="material-icons">remove</i></button>
-                            </div>
-                            <input id="product_cart_qty" type="text" class="form-control w-35" placeholder="" value="1">
-                            <div class="input-group-append">
-                                <button onclick="incrementQuantity.call(null, 'product_cart_qty')"
-                                        class="btn btn-light-grey px-1" type="button"><i class="material-icons">add</i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    {# TODO: show quantity input #}
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <p class="text-left">Price</p>
-                    </div>
-                    <div class="col">
-                        <p id="totalPrice" class="text-right">{{ currency }} {{ price | replace({'$': ''}) }}</p>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <button onclick="addToCart()" id="button_add_to_cart"
-                            class="btn btn-default btn-rounded btn-block col">Add
-                    </button>
-                </div>
-                <br>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script type="text/javascript">
